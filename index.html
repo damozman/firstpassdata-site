@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>First Pass Data | AAFES item setup and PIM data entry for vendors</title>
+<meta name="description" content="First Pass Data prepares, checks and submits your item data for AAFES PIM, so styles are accepted the first time and orders ship on schedule. Based in Fort Worth, Texas.">
+<link rel="canonical" href="https://firstpassdata.com/">
+<meta property="og:title" content="First Pass Data | Item setup accepted the first time">
+<meta property="og:description" content="Item data prepared, checked by software and reviewed by a person before it reaches the exchange.">
+<meta property="og:url" content="https://firstpassdata.com/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2316233A'/><path d='M9 16.5l4.5 4.5L23 11' stroke='%2334C27E' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "First Pass Data",
+  "url": "https://firstpassdata.com/",
+  "email": "hello@firstpassdata.com",
+  "founder": {"@type": "Person", "name": "Chris Mosley"},
+  "parentOrganization": {"@type": "Organization", "name": "3six9 Media Masters LLC"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Fort Worth", "addressRegion": "TX", "addressCountry": "US"},
+  "areaServed": "US",
+  "description": "Item setup, data entry and validation for vendors selling through AAFES and other military exchanges."
+}
+</script>
+<style>
+:root{
+  --ink:#16233A; --text:#2B3647; --muted:#5A6472; --rule:#D9DDE3;
+  --paper:#FFFFFF; --panel:#F3F5F7; --pass:#1F7A4D; --pass-bg:#E6F2EB;
+  --flag:#9A5B0B; --flag-bg:#FBF0DC; --link:#1D4E89;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,"Courier New",monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E8EDF4; --text:#C9D1DC; --muted:#93A0B0; --rule:#2C3746;
+    --paper:#0F1722; --panel:#162131; --pass:#5CC98F; --pass-bg:#16332A;
+    --flag:#E8B061; --flag-bg:#33291A; --link:#8DB8EA;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E8EDF4; --text:#C9D1DC; --muted:#93A0B0; --rule:#2C3746;
+  --paper:#0F1722; --panel:#162131; --pass:#5CC98F; --pass-bg:#16332A;
+  --flag:#E8B061; --flag-bg:#33291A; --link:#8DB8EA;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--text);font:400 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--link)}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header.site{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.05rem}
+.logo svg{width:28px;height:28px}
+nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:.95rem}
+nav a:hover{color:var(--ink)}
+h1,h2,h3{color:var(--ink);line-height:1.15;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:600;letter-spacing:-.02em;max-width:14ch}
+h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:600;letter-spacing:-.01em;margin-bottom:14px}
+h3{font-size:1.1rem;font-weight:600;margin-bottom:6px}
+p{margin:0 0 1em;max-width:62ch}
+.lede{font-size:1.2rem;color:var(--muted);margin-top:20px;max-width:46ch}
+.hero{display:grid;grid-template-columns:0.9fr 1.3fr;gap:40px;align-items:center;padding:48px 0 72px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-block;padding:12px 20px;border-radius:6px;font-weight:500;text-decoration:none;font-size:1rem}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{opacity:.9}
+.btn.quiet{color:var(--ink);border:1px solid var(--rule)}
+.btn.quiet:hover{border-color:var(--muted)}
+
+/* The one memorable element: a live-looking check of a supplier file */
+.specimen{margin:0;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px 18px 14px;overflow-x:auto}
+.specimen .cap{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-bottom:10px;gap:12px}
+.specimen table{width:100%;border-collapse:collapse;font:400 .82rem/1.4 var(--mono);min-width:460px}
+.specimen th{text-align:left;font:500 .78rem var(--sans);color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--rule)}
+.specimen td{padding:9px 8px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink)}
+.specimen tr:last-child td{border-bottom:0}
+.specimen .was{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--muted)}
+.tag{display:inline-block;font:500 .74rem/1.3 var(--sans);padding:3px 8px;border-radius:8px}
+.tag.ok{background:var(--pass-bg);color:var(--pass)}
+.tag.rev{background:var(--flag-bg);color:var(--flag)}
+.specimen tbody tr{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .specimen tbody tr{animation:check .45s ease-out both}
+  .specimen tbody tr:nth-child(1){animation-delay:.25s}
+  .specimen tbody tr:nth-child(2){animation-delay:.55s}
+  .specimen tbody tr:nth-child(3){animation-delay:.85s}
+  .specimen tbody tr:nth-child(4){animation-delay:1.15s}
+  .specimen tbody tr:nth-child(5){animation-delay:1.45s}
+  @keyframes check{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+}
+.specimen .foot{font-size:.85rem;color:var(--muted);margin-top:10px}
+
+section{padding:64px 0;border-top:1px solid var(--rule)}
+.split{display:grid;grid-template-columns:1fr 1.4fr;gap:48px}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:26px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:4px 14px}
+ol.steps li::before{content:counter(s);grid-row:span 2;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);color:var(--ink);display:grid;place-items:center;font-weight:600;font-size:.95rem}
+ol.steps p{margin:0;color:var(--muted)}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 40px;margin-top:8px}
+.checks div{border-left:3px solid var(--pass);padding-left:14px}
+.checks p{margin:0;color:var(--muted);font-size:.98rem}
+.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:10px}
+.terms p{color:var(--muted);font-size:.98rem;margin:0}
+.about p{font-size:1.08rem}
+.contact{background:var(--panel);border-radius:10px;padding:40px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
+.contact .addr{font-size:1rem;line-height:1.9}
+.contact .addr a{font-weight:500}
+footer{padding:40px 0 56px;color:var(--muted);font-size:.88rem}
+footer p{max-width:none;margin:.3em 0}
+
+@media (max-width:860px){
+  .hero,.split,.contact{grid-template-columns:1fr;gap:32px}
+  .terms{grid-template-columns:1fr}
+  .hero{padding-top:24px}
+  nav{display:none}
+}
+@media (max-width:560px){
+  .checks{grid-template-columns:1fr}
+  .contact{padding:26px}
+  section{padding:48px 0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="logo" href="/" aria-label="First Pass Data home">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#16233A"/><path d="M9 16.5l4.5 4.5L23 11" stroke="#34C27E" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    First Pass Data
+  </a>
+  <nav aria-label="Main">
+    <a href="#how">How it works</a>
+    <a href="#checks">What we check</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <h1>Item setup that's accepted the first time.</h1>
+    <p class="lede">We prepare, check and submit your product data for AAFES PIM, so your styles get item codes and your orders ship on schedule.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:hello@firstpassdata.com?subject=Item%20setup%20inquiry">Email us</a>
+      <a class="btn quiet" href="#how">See how it works</a>
+    </div>
+  </div>
+
+  <figure class="specimen" aria-label="Example: fields from a supplier file being corrected and checked">
+    <div class="cap"><span>Supplier file, checked before submission</span><span>Handbags</span></div>
+    <table>
+      <thead><tr><th scope="col">Field</th><th scope="col">As received</th><th scope="col">As submitted</th><th scope="col"></th></tr></thead>
+      <tbody>
+        <tr><td>UPC</td><td class="was">194715221086.0</td><td>194715221086</td><td><span class="tag ok">Check digit valid</span></td></tr>
+        <tr><td>UPC</td><td class="was">48135270967</td><td>048135270967</td><td><span class="tag ok">Leading zero restored</span></td></tr>
+        <tr><td>Color</td><td class="was">chalk/gold</td><td>White</td><td><span class="tag ok">Color family matched</span></td></tr>
+        <tr><td>MSRP</td><td>$395.00</td><td>395.00</td><td><span class="tag rev">Below retail, sent to reviewer</span></td></tr>
+        <tr><td>Image</td><td>IMG_2231.png</td><td>1200 × 1200</td><td><span class="tag rev">Needs 2000 × 2000 JPEG</span></td></tr>
+      </tbody>
+    </table>
+    <figcaption class="foot">Software fixes what it can prove. A person decides everything else.</figcaption>
+  </figure>
+</div>
+
+<section id="how">
+  <div class="split">
+    <div>
+      <h2>How it works</h2>
+      <p>A rejected or late item file costs you the ship window. Our process is built so the first file we submit is the right one.</p>
+    </div>
+    <ol class="steps">
+      <li><h3>Send your data as it is</h3><p>A system export, line sheet, spreadsheet or feed. No reformatting on your side.</p></li>
+      <li><h3>Every field is checked against the exchange's rules</h3><p>Our tools map your columns to the current PIM template and test every value: barcodes, required fields, dropdown lists, pricing and images.</p></li>
+      <li><h3>A person reviews every exception</h3><p>Anything the software can't prove is correct goes to a reviewer. Questions only you can answer come back to you in one list, not a stream of emails.</p></li>
+      <li><h3>You receive a ready file and a validation report</h3><p>We load the items into PIM, or hand you the finished template. Item data can go in first, with photos added when they arrive.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="checks">
+  <h2>What we check on every file</h2>
+  <div class="checks">
+    <div><h3>Barcodes</h3><p>Check digits, lost leading zeros, and spreadsheet damage such as “.0” endings.</p></div>
+    <div><h3>Required fields</h3><p>Every mandatory attribute for the item's category is present and in the right format.</p></div>
+    <div><h3>Dropdown values</h3><p>Colors, sizes, materials and units matched to the exact values PIM accepts.</p></div>
+    <div><h3>Pricing rules</h3><p>MSRP is at or above unit retail, and prices are clean numbers.</p></div>
+    <div><h3>Category attributes</h3><p>Only attributes that belong to the item's category are sent, so none are rejected.</p></div>
+    <div><h3>Product images</h3><p>2000 × 2000 pixel JPEGs, named and matched to the right item before the upload window opens.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>How we work with you</h2>
+  <div class="terms">
+    <div><h3>Start small</h3><p>We begin with one small file so you can judge the results before committing to more.</p></div>
+    <div><h3>Clear pricing</h3><p>Quoted after a short call about your volume and deadlines. No long-term contract required.</p></div>
+    <div><h3>Your data stays yours</h3><p>Used only for your submissions and deleted on request. We're glad to sign an NDA.</p></div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="split">
+    <h2>About</h2>
+    <div>
+      <p>First Pass Data was founded by Chris Mosley, who spent 26 years in operations, vendor and product management, and distribution, including product and operations roles at The Dannon Company and Specialized Products Company.</p>
+      <p>Item setup is detail work with hard deadlines. We treat it as an engineering problem: software catches what it can, and a person reviews the rest before anything is submitted.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <div>
+      <h2>Have styles waiting on item setup?</h2>
+      <p>Tell us how many styles you have and when they ship. We'll reply within one business day.</p>
+    </div>
+    <div class="addr">
+      <a href="mailto:hello@firstpassdata.com?subject=Item%20setup%20inquiry">hello@firstpassdata.com</a><br>
+      Chris Mosley, <a href="mailto:chris@firstpassdata.com">chris@firstpassdata.com</a><br>
+      Fort Worth, Texas
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>© 2026 First Pass Data, operated by 3six9 Media Masters LLC.</p>
+  <p>First Pass Data is an independent service provider and is not affiliated with or endorsed by the Army &amp; Air Force Exchange Service (AAFES).</p>
+</footer>
+
+</div>
+</body>
+</html>
