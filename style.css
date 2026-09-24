@@ -146,10 +146,10 @@ ol.steps p{margin:0;color:var(--muted)}
 .notice{background:var(--pass-bg);color:var(--pass);border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.95rem}
 .subcta{color:var(--muted);font-size:.88rem;margin-top:8px}
 
-.band{background:var(--ink);color:#fff;border-radius:10px;padding:36px;display:grid;grid-template-columns:1.3fr auto;gap:24px;align-items:center}
+.band{background:#16233A;color:#fff;border-radius:10px;padding:36px;display:grid;grid-template-columns:1.3fr auto;gap:24px;align-items:center}
 .band h2,.band p{color:#fff}
 .band p{opacity:.82;margin:6px 0 0}
-.band .btn.primary{background:#fff;color:var(--ink)}
+.band .btn.primary{background:#fff;color:#16233A}
 
 footer{padding:36px 0 56px;color:var(--muted);font-size:.88rem}
 footer .fnav{display:flex;gap:18px;margin-bottom:14px;flex-wrap:wrap}
