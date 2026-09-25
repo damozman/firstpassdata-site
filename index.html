@@ -81,7 +81,8 @@
         <tr><td>Image</td><td>IMG_2231.png</td><td>1200 &times; 1200</td><td><span class="tag rev">Needs 2000 &times; 2000 JPEG</span></td></tr>
       </tbody>
     </table>
-    <figcaption class="foot">Software fixes what it can prove. A person decides everything else.</figcaption>
+    <div class="run-status" aria-live="polite"><span id="run-msg">5 fields checked: 3 fixed automatically, 2 sent to a reviewer.</span><button type="button" id="run-again" class="linkbtn" hidden>Run the check again</button></div>
+<figcaption class="foot">Software fixes what it can prove. A person decides everything else.</figcaption>
   </figure>
 </div>
 
@@ -114,7 +115,7 @@
 <section id="checks">
   <h2>What we check on every file</h2>
   <div class="checks">
-    <div><h3>Barcodes</h3><p>Check digits, lost leading zeros, and spreadsheet damage such as &ldquo;.0&rdquo; endings and scientific notation.</p></div>
+    <div><h3>Barcodes</h3><p>Check digits, lost leading zeros, and spreadsheet damage such as &ldquo;.0&rdquo; endings and scientific notation. <a href="#barcode-check">Try it on your own list</a>.</p></div>
     <div><h3>Required fields</h3><p>Every mandatory attribute for the item's category is present and in the right format.</p></div>
     <div><h3>Dropdown values</h3><p>Colors, sizes, materials and units matched to the exact values the buyer's system accepts.</p></div>
     <div><h3>Pricing rules</h3><p>MSRP is at or above unit retail, and prices are clean numbers.</p></div>
@@ -122,6 +123,38 @@
     <div><h3>Product images</h3><p>2000 &times; 2000 pixel JPEGs, named and matched to the right item before the upload window opens.</p></div>
   </div>
   <p style="margin-top:18px"><a href="/services.html">See the full service breakdown &rarr;</a></p>
+</section>
+
+<section id="barcode-check">
+<div class="split">
+<div>
+<h2>Check your barcodes</h2>
+<p>Paste UPCs or EANs straight from your spreadsheet, one per line. You'll see which ones a buyer's system would reject, and which can be repaired safely.</p>
+<p class="muted-note">This runs in your browser. Nothing you paste is sent to us.</p>
+</div>
+<div class="checker">
+<label for="upc-in">Barcodes, one per line</label>
+<textarea id="upc-in" rows="7" spellcheck="false" placeholder="194715221086.0&#10;48135270967&#10;1.94715E+11"></textarea>
+<div class="checker-actions">
+<button type="button" class="btn primary small" id="upc-run">Check barcodes</button>
+<button type="button" class="linkbtn" id="upc-sample">Fill in an example</button>
+</div>
+<div id="upc-out" hidden>
+<p id="upc-sum" class="checker-sum" aria-live="polite"></p>
+<div class="checker-table">
+<table>
+<thead><tr><th scope="col">As pasted</th><th scope="col">Cleaned</th><th scope="col">Result</th></tr></thead>
+<tbody id="upc-rows"></tbody>
+</table>
+</div>
+<div class="checker-actions">
+<button type="button" class="btn quiet small" id="upc-copy">Copy cleaned list</button>
+<span id="upc-copied" class="muted-note" hidden>Copied. Codes that need a look are left out.</span>
+</div>
+<p class="checker-cta" id="upc-cta" hidden>Have a whole file like this? <a href="/contact.html">Send it over</a> and we'll clean every field, not just barcodes.</p>
+</div>
+</div>
+</div>
 </section>
 
 <section aria-label="Get started">
@@ -148,5 +181,94 @@
 </footer>
 
 </div>
+<script>
+/* Hero: run the check once on load, row by row. Static final state without JS or with reduced motion. */
+(function(){
+  const fig=document.querySelector('.specimen'); if(!fig) return;
+  const rows=[...fig.querySelectorAll('tbody tr')];
+  const msg=document.getElementById('run-msg'), again=document.getElementById('run-again');
+  const finalMsg=msg.textContent;
+  if(!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  rows.forEach(r=>{const out=r.cells[2]; out.dataset.final=out.textContent;});
+  function reset(){
+    rows.forEach(r=>{r.className='queued'; r.cells[2].textContent=r.cells[1].textContent;});
+    msg.textContent='Checking 5 fields…'; again.hidden=true;
+  }
+  function run(){
+    reset(); fig.classList.add('running');
+    let i=0;
+    const step=()=>{
+      if(i>0){const p=rows[i-1]; p.className='done'; p.cells[2].textContent=p.cells[2].dataset.final;}
+      if(i===rows.length){fig.classList.remove('running'); msg.textContent=finalMsg; again.hidden=false; return;}
+      rows[i].className='checking'; msg.textContent='Checking '+rows[i].cells[0].textContent+'…';
+      i++; setTimeout(step,620);
+    };
+    setTimeout(step,500);
+  }
+  again.addEventListener('click',run);
+  // Start when the table is on screen (it is, above the fold, on most screens)
+  const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){io.disconnect();run();}},{threshold:.4});
+  io.observe(fig);
+})();
+
+/* Barcode checker: GTIN-8/12/13/14 check digits and common spreadsheet damage. */
+(function(){
+  const $=id=>document.getElementById(id);
+  const input=$('upc-in'); if(!input) return;
+  const sample=['194715221086.0','48135270967','1.94715E+11','012345678905','0 36000 29145 2','4006381333931','194715221087','8675309'].join('\n');
+
+  function checkDigitOk(d){
+    const n=d.split('').map(Number), body=n.slice(0,-1).reverse();
+    const sum=body.reduce((t,x,i)=>t+x*(i%2===0?3:1),0);
+    return (10-sum%10)%10===n[n.length-1];
+  }
+  function expand(raw){ // scientific notation -> digits, if no digits were lost
+    const m=raw.match(/^(\d)(?:[.,](\d+))?e\+?(\d+)$/i); if(!m) return null;
+    const mant=m[1]+(m[2]||''), exp=+m[3];
+    return mant.length-1<=exp ? {digits:mant+'0'.repeat(exp-(mant.length-1)), lost:mant.length-1<exp} : null;
+  }
+  function check(raw){
+    let v=raw.trim(), notes=[];
+    if(!v) return null;
+    const sci=expand(v.replace(/\s/g,''));
+    if(sci){
+      if(sci.lost) return {raw, clean:'', status:'rev', note:'Scientific notation: digits were lost. Re-export this column as text.'};
+      v=sci.digits; notes.push('scientific notation expanded');
+    }
+    if(/[.,]0+$/.test(v)){v=v.replace(/[.,]0+$/,''); notes.push('“.0” removed');}
+    if(/[^\d]/.test(v)){
+      const stripped=v.replace(/[\s-]/g,'');
+      if(/[^\d]/.test(stripped)) return {raw, clean:'', status:'rev', note:'Contains characters that aren’t digits.'};
+      v=stripped; notes.push('spaces removed');
+    }
+    if(v.length===11 && checkDigitOk('0'+v)){v='0'+v; notes.push('leading zero restored');}
+    if(![8,12,13,14].includes(v.length)) return {raw, clean:v, status:'rev', note:'Wrong length: '+v.length+' digits. UPCs have 12, EANs 13.'};
+    if(!checkDigitOk(v)) return {raw, clean:v, status:'rev', note:'Check digit doesn’t match. Confirm this code with your barcode source.'};
+    if(notes.length) return {raw, clean:v, status:'fix', note:notes[0][0].toUpperCase()+notes.join(', ').slice(1)};
+    return {raw, clean:v, status:'ok', note:'Valid'};
+  }
+  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let results=[];
+  function run(){
+    const lines=input.value.split(/\r?\n|\t|;/).slice(0,500);
+    results=lines.map(check).filter(Boolean);
+    if(!results.length){ $('upc-out').hidden=false; $('upc-sum').textContent='Paste at least one barcode above, one per line.'; $('upc-rows').innerHTML=''; $('upc-cta').hidden=true; return; }
+    const c={ok:0,fix:0,rev:0}; results.forEach(r=>c[r.status]++);
+    $('upc-rows').innerHTML=results.map(r=>'<tr class="'+r.status+'"><td class="was">'+esc(r.raw)+'</td><td>'+(r.clean?esc(r.clean):'&ndash;')+'</td><td><span class="tag '+(r.status==='rev'?'rev':'ok')+'">'+esc(r.note)+'</span></td></tr>').join('');
+    const parts=[];
+    if(c.ok) parts.push(c.ok+' valid');
+    if(c.fix) parts.push(c.fix+' repaired');
+    if(c.rev) parts.push(c.rev+' need'+(c.rev===1?'s':'')+' a look');
+    $('upc-sum').textContent=results.length+' checked: '+parts.join(', ')+'.';
+    $('upc-out').hidden=false; $('upc-copied').hidden=true; $('upc-cta').hidden=false;
+  }
+  $('upc-run').addEventListener('click',run);
+  $('upc-sample').addEventListener('click',()=>{input.value=sample; run();});
+  $('upc-copy').addEventListener('click',async()=>{
+    const list=results.filter(r=>r.status!=='rev').map(r=>r.clean).join('\n');
+    try{ await navigator.clipboard.writeText(list); $('upc-copied').hidden=false; }catch(e){ $('upc-copied').textContent='Couldn’t copy automatically. Select the Cleaned column instead.'; $('upc-copied').hidden=false; }
+  });
+})();
+</script>
 </body>
 </html>
