@@ -51,20 +51,29 @@
 </div>
 
 <section class="tight">
-  <div id="sent-notice" class="notice" style="display:none">Thanks &mdash; that's in. We'll reply within one business day to set up a short call.</div>
+  <div id="sent-notice" class="notice" style="display:none">
+    <p>Thanks &mdash; that's in. We'll reply within one business day to set up a short call.</p>
+    <p class="cal-only" hidden>Rather pick a time now? <a class="cal-link" href="#">Book a 15-minute call</a>.</p>
+    <p>Have a sample file handy? <a class="sample-link" href="mailto:files@firstpassdata.com">Email it to files@firstpassdata.com</a> &mdash; a few rows is plenty, and it makes the call much more useful.</p>
+  </div>
 
   <div class="split even">
     <div>
       <h2>What we'll ask</h2>
-      <p>Five short questions, nothing about pricing or budget &mdash; we'll cover that on the call once we understand the work.</p>
+      <p>A few quick questions, nothing about pricing or budget &mdash; we'll cover that on the call once we understand the work. Rough answers are fine.</p>
       <ul class="checklist">
         <li>The buyer or exchange you're setting items up for</li>
-        <li>Roughly how many styles are in this batch</li>
+        <li>Roughly how many styles (and SKUs, if you know) are in this batch</li>
         <li>Where your product data lives today</li>
         <li>The date the items need to ship or go live</li>
-        <li>Anything that's caused rejects or delays before</li>
+        <li>Whether photos are ready, and anything that's caused rejects before</li>
       </ul>
-      <p class="subcta">Prefer email? Write to <a href="mailto:hello@firstpassdata.com">hello@firstpassdata.com</a> directly.</p>
+      <div class="alt-contact">
+        <p><strong>The form gets you a better first call</strong> &mdash; we come prepared instead of asking you to repeat yourself.</p>
+        <p>Rather email? <a class="email-link" href="mailto:hello@firstpassdata.com">hello@firstpassdata.com</a> opens a message with the same questions filled in.</p>
+        <p>Have a sample file? <a class="sample-link" href="mailto:files@firstpassdata.com">Send it to files@firstpassdata.com</a>. A few rows is plenty.</p>
+        <p class="cal-only" hidden>Or <a class="cal-link" href="#">book a 15-minute call</a> directly.</p>
+      </div>
     </div>
 
     <form class="intake" action="https://formsubmit.co/hello@firstpassdata.com" method="POST">
@@ -97,8 +106,34 @@
 
       <div class="row2">
         <div class="field">
-          <label for="count">Approx. style count <span class="hint">(this batch or season)</span></label>
-          <input type="text" id="count" name="Approx style count" required>
+          <label for="count">How many styles? <span class="hint">(this batch or season)</span></label>
+          <select id="count" name="Style count" required>
+            <option value="">Choose one</option>
+            <option>Under 25</option>
+            <option>25&ndash;100</option>
+            <option>100&ndash;300</option>
+            <option>300+</option>
+            <option>Not sure</option>
+          </select>
+          <p class="note">A style is one design. The same bag in 3 colors counts as 1 style.</p>
+        </div>
+        <div class="field">
+          <label for="skus">Total SKUs <span class="hint">(optional, if you know it)</span></label>
+          <input type="text" id="skus" name="Total SKUs" inputmode="numeric" placeholder="e.g. 240">
+          <p class="note">If you have a list with one row per barcode, that row count is perfect.</p>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="variants">Colors or sizes per style <span class="hint">(average)</span></label>
+          <select id="variants" name="Colors or sizes per style">
+            <option value="">Choose one</option>
+            <option>1</option>
+            <option>2&ndash;4</option>
+            <option>5 or more</option>
+            <option>Not sure</option>
+          </select>
         </div>
         <div class="field">
           <label for="ship">Ship date / deadline</label>
@@ -110,9 +145,11 @@
         <label for="source">Where does your product data live today?</label>
         <select id="source" name="Data source" required>
           <option value="">Choose one</option>
-          <option>Spreadsheet or line sheet</option>
+          <option>Spreadsheet or system export (Excel / CSV)</option>
+          <option>Line sheet (PDF)</option>
+          <option>Line sheet (Excel)</option>
           <option>Our own PIM or ERP</option>
-          <option>A vendor/retailer portal</option>
+          <option>Scattered &mdash; we'd need to gather it</option>
           <option>Not sure yet</option>
           <option>Other</option>
         </select>
@@ -143,9 +180,49 @@
 </main>
 
 <script>
+  // Paste your Cal.com booking link here (e.g. "https://cal.com/firstpassdata/intro").
+  // While it's empty, the "book a call" lines stay hidden.
+  const CAL_URL = "";
+
   if (new URLSearchParams(location.search).get('sent') === 'true') {
     document.getElementById('sent-notice').style.display = 'block';
   }
+  if (CAL_URL) {
+    document.querySelectorAll('.cal-only').forEach(el => el.hidden = false);
+    document.querySelectorAll('.cal-link').forEach(a => a.href = CAL_URL);
+  }
+
+  // Pre-filled emails. Any answers already typed into the form are carried over.
+  const val = id => (document.getElementById(id) || {}).value || '';
+  function questions() {
+    return [
+      'Company / brand: ' + val('company'),
+      'Your name: ' + val('name'),
+      'Buyer or exchange (AAFES, NEXCOM, MCX, other): ' + val('buyer'),
+      'How many styles: ' + val('count'),
+      'Total SKUs (if known): ' + val('skus'),
+      'Colors or sizes per style: ' + val('variants'),
+      'Where the product data lives (export, line sheet, PIM/ERP, other): ' + val('source'),
+      'Ship date / deadline: ' + val('ship'),
+      'Photos ready? (yes / some / not yet): ' + val('photos'),
+    ].join('\n');
+  }
+  function mailto(addr, subject, intro, outro) {
+    const body = intro + '\n\n' + questions() + '\n\n' + outro;
+    return 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+  function co() { return val('company') ? ' \u2014 ' + val('company') : ''; }
+
+  document.querySelectorAll('.email-link').forEach(a => a.addEventListener('click', () => {
+    a.href = mailto('hello@firstpassdata.com', 'Item setup inquiry' + co(),
+      'Hi First Pass Data,\n\nWe have styles waiting on item setup. Rough answers below:',
+      'Anything that has caused rejects or delays before:\n\n\nThanks,');
+  }));
+  document.querySelectorAll('.sample-link').forEach(a => a.addEventListener('click', () => {
+    a.href = mailto('files@firstpassdata.com', 'Sample file' + co(),
+      'Hi First Pass Data,\n\nAttached is a sample of our product data (a few rows is fine).',
+      'Reminder: attach the file before sending.\n\nThanks,');
+  }));
 </script>
 
 <footer>
