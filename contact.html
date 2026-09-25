@@ -79,7 +79,7 @@
     <form class="intake" action="https://formsubmit.co/hello@firstpassdata.com" method="POST">
       <input type="hidden" name="_subject" value="New item setup inquiry — First Pass Data">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://firstpassdata.com/contact.html?sent=true">
+      <input type="hidden" name="_next" id="next-url" value="https://firstpassdata.com/contact.html?sent=true">
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
 
       <div class="row2">
@@ -100,7 +100,7 @@
         </div>
         <div class="field">
           <label for="buyer">Buyer or exchange</label>
-          <input type="text" id="buyer" name="Buyer or exchange" placeholder="e.g. AAFES, NEXCOM, MCX,... " required>
+          <input type="text" id="buyer" name="Buyer or exchange" placeholder="e.g. AAFES, NEXCOM, MCX" required>
         </div>
       </div>
 
@@ -173,7 +173,7 @@
       <div class="actions">
         <button class="btn primary" type="submit">Send &amp; get a call scheduled</button>
       </div>
-      <p class="subcta">We'll reply within one business day. No data files needed yet &mdash; just this.</p>
+      <p class="subcta">Next, you'll pick a time for a 15-minute call, with your details already filled in. No data files needed yet.</p>
     </form>
   </div>
 </section>
@@ -190,6 +190,25 @@
   if (CAL_URL) {
     document.querySelectorAll('.cal-only').forEach(el => el.hidden = false);
     document.querySelectorAll('.cal-link').forEach(a => a.href = CAL_URL);
+  }
+
+  // After the form is emailed to us, send the visitor to the booking page
+  // with name, email, company and a short summary already filled in.
+  const form = document.querySelector('form.intake');
+  if (CAL_URL && form) {
+    form.addEventListener('submit', () => {
+      const q = new URLSearchParams();
+      if (val('name')) q.set('name', val('name'));
+      if (val('email')) q.set('email', val('email'));
+      if (val('company')) q.set('company', val('company'));
+      const notes = [
+        val('count') && 'Styles: ' + val('count'),
+        val('skus') && 'SKUs: ' + val('skus'),
+        val('ship') && 'Deadline: ' + val('ship'),
+      ].filter(Boolean).join(' | ');
+      if (notes) q.set('notes', notes);
+      document.getElementById('next-url').value = CAL_URL + '?' + q.toString();
+    });
   }
 
   // Pre-filled emails. Any answers already typed into the form are carried over.
