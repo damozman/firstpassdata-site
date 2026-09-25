@@ -136,6 +136,12 @@ ol.steps p{margin:0;color:var(--muted)}
 .field{display:grid;gap:6px}
 .field label{font-size:.9rem;font-weight:500;color:var(--ink)}
 .field .hint{font-size:.82rem;color:var(--muted);font-weight:400}
+.field .note{font-size:.82rem;color:var(--muted);margin:0;line-height:1.4}
+.alt-contact{margin-top:22px;padding:16px 18px;border:1px solid var(--rule);border-radius:8px;font-size:.93rem}
+.alt-contact p{margin:0 0 8px}
+.alt-contact p:last-child{margin-bottom:0}
+.notice p{margin:0 0 6px}
+.notice p:last-child{margin-bottom:0}
 .field input[type=text],.field input[type=email],.field select,.field textarea{
   font:400 1rem var(--sans);color:var(--text);background:var(--paper);
   border:1px solid var(--rule);border-radius:6px;padding:10px 12px;width:100%;
