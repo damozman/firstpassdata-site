@@ -227,7 +227,7 @@ ol.steps.worked .ledger{grid-column:3;grid-row:1 / span 2}
 }
 
 /* hero: give the check table more room so it fits without scrolling */
-.hero{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:40px}
+@media (min-width:861px){ .hero{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:40px} }
 .specimen{padding:18px 16px 14px}
 .specimen table{min-width:0}
 .specimen td,.specimen th{padding-left:6px;padding-right:6px}
@@ -285,3 +285,8 @@ ol.steps.worked .ledger{grid-column:3;grid-row:1 / span 2}
   .r-sec{break-inside:avoid}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+/* mobile menu: hide the scrollbar and fit all links on common phone widths */
+nav.mobile{scrollbar-width:none}
+nav.mobile::-webkit-scrollbar{display:none}
+@media (max-width:420px){ nav.mobile{gap:12px} nav.mobile a{font-size:.86rem} }
+@media (max-width:860px){ .hero .specimen{margin:0;width:auto;max-width:none} nav.mobile{margin-top:8px} }
