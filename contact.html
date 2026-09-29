@@ -141,28 +141,68 @@
         </div>
       </div>
 
-      <div class="field">
-        <label for="source">Where does your product data live today?</label>
-        <select id="source" name="Data source" required>
-          <option value="">Choose one</option>
-          <option>Spreadsheet or system export (Excel / CSV)</option>
-          <option>Line sheet (PDF)</option>
-          <option>Line sheet (Excel)</option>
-          <option>Our own PIM or ERP</option>
-          <option>Scattered &mdash; we'd need to gather it</option>
-          <option>Not sure yet</option>
-          <option>Other</option>
-        </select>
+      <div class="row2">
+        <div class="field">
+          <label for="source">How will you send the data?</label>
+          <select id="source" name="How they'll send the data" required>
+            <option value="">Choose one</option>
+            <option value="a system export">A system export (Excel / CSV from your system)</option>
+            <option value="a line sheet">A line sheet</option>
+            <option value="a spreadsheet">A spreadsheet you keep yourselves</option>
+            <option value="a PDF or printed sheets">A PDF or printed sheets</option>
+            <option value="scans (photos of paper, image-only PDFs)">Scans (photos of paper, image-only PDFs)</option>
+            <option value="not sure yet">Not sure yet</option>
+          </select>
+          <p class="note">If it's a mix, pick the main one and tell us the rest below.</p>
+        </div>
+        <div class="field">
+          <label for="barcodes">Does every item have a UPC?</label>
+          <select id="barcodes" name="Does every item have a UPC?">
+            <option value="">Choose one</option>
+            <option>Yes, every item has a UPC</option>
+            <option>Some are missing</option>
+            <option>Mostly missing</option>
+          </select>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="photos">Are product photos ready?</label>
-        <select id="photos" name="Photos ready">
-          <option value="">Choose one</option>
-          <option>Yes, ready now</option>
-          <option>Some, not all</option>
-          <option>Not yet</option>
-        </select>
+      <div class="row2">
+        <div class="field">
+          <label for="categories">How many product categories?</label>
+          <select id="categories" name="How many categories?">
+            <option value="">Choose one</option>
+            <option>1</option>
+            <option>2-3</option>
+            <option>4 or more</option>
+          </select>
+          <p class="note">For example, totes, wallets and crossbody bags is 3.</p>
+        </div>
+        <div class="field">
+          <label for="colors">Your color names</label>
+          <select id="colors" name="Their color names">
+            <option value="">Choose one</option>
+            <option value="Plain (Black, Navy)">Plain (Black, Navy)</option>
+            <option value="A few of their own">A few of our own</option>
+            <option value="Mostly their own (Campfire Glow)">Mostly our own (Campfire Glow)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="photos">Are product photos ready?</label>
+          <select id="photos" name="Are photos ready?">
+            <option value="">Choose one</option>
+            <option value="Ready, 2000x2000">Yes, at least 2000 &times; 2000</option>
+            <option value="Some need work">Some need work</option>
+            <option value="Not ready or low-res">Not ready yet, or low-res</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rush">Styles you need rushed <span class="hint">(optional)</span></label>
+          <input type="text" id="rush" name="Styles they need rushed" inputmode="numeric" placeholder="e.g. 10">
+          <p class="note">Rush is 2&ndash;4 business days on those styles.</p>
+        </div>
       </div>
 
       <div class="field">
@@ -221,9 +261,13 @@
       'How many styles: ' + val('count'),
       'Total SKUs (if known): ' + val('skus'),
       'Colors or sizes per style: ' + val('variants'),
-      'Where the product data lives (export, line sheet, PIM/ERP, other): ' + val('source'),
+      'How you will send the data (system export, line sheet, spreadsheet, PDF or printed sheets, scans): ' + val('source'),
+      'Does every item have a UPC? (yes / some are missing / mostly missing): ' + val('barcodes'),
+      'How many product categories? (1 / 2-3 / 4 or more): ' + val('categories'),
+      'Your color names (plain like Black, Navy / a few of your own / mostly your own): ' + val('colors'),
       'Ship date / deadline: ' + val('ship'),
-      'Photos ready? (yes / some / not yet): ' + val('photos'),
+      'Photos ready? (2000x2000 / some need work / not ready or low-res): ' + val('photos'),
+      'Styles you need rushed (if any): ' + val('rush'),
     ].join('\n');
   }
   function mailto(addr, subject, intro, outro) {
