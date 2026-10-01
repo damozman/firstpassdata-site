@@ -82,53 +82,53 @@
       <input type="hidden" name="_next" id="next-url" value="https://firstpassdata.com/contact.html?sent=true">
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
 
-      <div class="row2">
-        <div class="field">
-          <label for="name">Your name</label>
-          <input type="text" id="name" name="Name" required>
+      <fieldset class="sec">
+        <legend><span>1</span> About you</legend>
+        <div class="row2">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="Name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" required autocomplete="email" placeholder="name@company.com">
+            <p class="err" id="email-err" hidden>Please enter your full email address, like name@company.com (it needs an @ and a domain).</p>
+          </div>
         </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="Email" required autocomplete="email" placeholder="name@company.com">
-          <p class="err" id="email-err" hidden>Please enter your full email address, like name@company.com (it needs an @ and a domain).</p>
-        </div>
-      </div>
-
-      <div class="row2">
         <div class="field">
           <label for="company">Company / brand</label>
-          <input type="text" id="company" name="Company" required>
+          <input type="text" id="company" name="Company" required autocomplete="organization">
         </div>
         <div class="field">
           <label for="buyer">Buyer or exchange</label>
           <input type="text" id="buyer" name="Buyer or exchange" placeholder="e.g. AAFES, NEXCOM, MCX" required>
+          <p class="note">Who you're setting items up for.</p>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="row2">
-        <div class="field">
-          <label for="count">How many styles? <span class="hint">(this batch or season)</span></label>
-          <select id="count" name="Style count" required>
-            <option value="">Choose one</option>
-            <option>Under 25</option>
-            <option>25&ndash;100</option>
-            <option>100&ndash;300</option>
-            <option>300+</option>
-            <option>Not sure</option>
-          </select>
-          <p class="note">A style is one design. The same bag in 3 colors counts as 1 style.</p>
+      <fieldset class="sec">
+        <legend><span>2</span> Your items</legend>
+        <div class="row2">
+          <div class="field">
+            <label for="count">How many styles? <span class="hint">(this batch or season)</span></label>
+            <select id="count" name="Style count" required>
+              <option value="">Choose one</option>
+              <option>Under 25</option>
+              <option>25&ndash;100</option>
+              <option>100&ndash;300</option>
+              <option>300+</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="skus">Total SKUs <span class="hint">(optional)</span></label>
+            <input type="text" id="skus" name="Total SKUs" inputmode="numeric" placeholder="e.g. 240">
+          </div>
         </div>
-        <div class="field">
-          <label for="skus">Total SKUs <span class="hint">(optional, if you know it)</span></label>
-          <input type="text" id="skus" name="Total SKUs" inputmode="numeric" placeholder="e.g. 240">
-          <p class="note">If you have a list with one row per barcode, that row count is perfect.</p>
-        </div>
-      </div>
-
-      <div class="row2">
+        <p class="note">A style is one design: the same bag in 3 colors is 1 style and 3 SKUs. If you have a list with one row per barcode, that row count is your SKUs.</p>
         <div class="field">
           <label for="variants">Colors or sizes per style <span class="hint">(average)</span></label>
-          <select id="variants" name="Colors or sizes per style">
+          <select id="variants" name="Colors or sizes per style" required>
             <option value="">Choose one</option>
             <option>1</option>
             <option>2&ndash;4</option>
@@ -137,12 +137,24 @@
           </select>
         </div>
         <div class="field">
-          <label for="ship">Ship date / deadline</label>
-          <input type="text" id="ship" name="Ship date or deadline" required>
+          <label for="categories">How many product categories?</label>
+          <select id="categories" name="How many categories?" required>
+            <option value="">Choose one</option>
+            <option>1</option>
+            <option>2-3</option>
+            <option>4 or more</option>
+            <option>Not sure</option>
+          </select>
+          <p class="note">For example, totes, wallets and crossbody bags is 3.</p>
         </div>
-      </div>
+        <div class="field">
+          <label for="catnames">Which categories? <span class="hint">(optional)</span></label>
+          <input type="text" id="catnames" name="Which categories" placeholder="e.g. totes, wallets, crossbody bags">
+        </div>
+      </fieldset>
 
-      <div class="row2">
+      <fieldset class="sec">
+        <legend><span>3</span> Your data</legend>
         <div class="field">
           <label id="source-label">How will you send the data? <span class="hint">(tick all that apply)</span></label>
           <div class="checks" id="source" role="group" aria-labelledby="source-label">
@@ -158,60 +170,54 @@
         </div>
         <div class="field">
           <label for="barcodes">Does every item have a UPC?</label>
-          <select id="barcodes" name="Does every item have a UPC?">
+          <select id="barcodes" name="Does every item have a UPC?" required>
             <option value="">Choose one</option>
             <option>Yes, every item has a UPC</option>
             <option>Some are missing</option>
             <option>Mostly missing</option>
+            <option>Not sure</option>
           </select>
-        </div>
-      </div>
-
-      <div class="row2">
-        <div class="field">
-          <label for="categories">How many product categories?</label>
-          <select id="categories" name="How many categories?">
-            <option value="">Choose one</option>
-            <option>1</option>
-            <option>2-3</option>
-            <option>4 or more</option>
-          </select>
-          <p class="note">For example, totes, wallets and crossbody bags is 3.</p>
-          <label for="catnames" style="margin-top:6px">Which categories? <span class="hint">(optional)</span></label>
-          <input type="text" id="catnames" name="Which categories" placeholder="e.g. totes, wallets, crossbody bags">
         </div>
         <div class="field">
           <label for="colors">Your color names</label>
-          <select id="colors" name="Their color names">
+          <select id="colors" name="Their color names" required>
             <option value="">Choose one</option>
             <option value="Plain (Black, Navy)">Plain (Black, Navy)</option>
             <option value="A few of their own">A few of our own</option>
             <option value="Mostly their own (Campfire Glow)">Mostly our own (Campfire Glow)</option>
+            <option value="Not sure">Not sure</option>
           </select>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="row2">
+      <fieldset class="sec">
+        <legend><span>4</span> Photos and timing</legend>
         <div class="field">
           <label for="photos">Are product photos ready?</label>
-          <select id="photos" name="Are photos ready?">
+          <select id="photos" name="Are photos ready?" required>
             <option value="">Choose one</option>
             <option value="Ready, 2000x2000">Yes, at least 2000 &times; 2000</option>
             <option value="Some need work">Some need work</option>
             <option value="Not ready or low-res">Not ready yet, or low-res</option>
+            <option value="Not sure">Not sure</option>
           </select>
         </div>
-        <div class="field">
-          <label for="rush">Styles you need rushed <span class="hint">(optional)</span></label>
-          <input type="text" id="rush" name="Styles they need rushed" inputmode="numeric" placeholder="e.g. 10">
-          <p class="note">Rush is 2&ndash;4 business days on those styles.</p>
+        <div class="row2">
+          <div class="field">
+            <label for="ship">Ship date / deadline</label>
+            <input type="text" id="ship" name="Ship date or deadline" required placeholder="e.g. Nov 15">
+          </div>
+          <div class="field">
+            <label for="rush">Styles you need rushed <span class="hint">(optional)</span></label>
+            <input type="text" id="rush" name="Styles they need rushed" inputmode="numeric" placeholder="e.g. 10">
+          </div>
         </div>
-      </div>
-
-      <div class="field">
-        <label for="issues">Anything caused rejects or delays before? <span class="hint">(optional)</span></label>
-        <textarea id="issues" name="Past issues"></textarea>
-      </div>
+        <p class="note">Rush is 2&ndash;4 business days on those styles.</p>
+        <div class="field">
+          <label for="issues">Anything caused rejects or delays before? <span class="hint">(optional)</span></label>
+          <textarea id="issues" name="Past issues"></textarea>
+        </div>
+      </fieldset>
 
       <div class="actions">
         <button class="btn primary" type="submit">Send &amp; get a call scheduled</button>
