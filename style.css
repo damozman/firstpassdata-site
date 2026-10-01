@@ -134,7 +134,7 @@ ol.steps p{margin:0;color:var(--muted)}
 /* intake form */
 .intake{display:grid;gap:16px;max-width:640px}
 .intake .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{display:grid;gap:6px}
+.field{display:grid;gap:6px;align-content:start}
 .field label{font-size:.9rem;font-weight:500;color:var(--ink)}
 .field .hint{font-size:.82rem;color:var(--muted);font-weight:400}
 .field .note{font-size:.82rem;color:var(--muted);margin:0;line-height:1.4}
@@ -148,6 +148,10 @@ ol.steps p{margin:0;color:var(--muted)}
   border:1px solid var(--rule);border-radius:6px;padding:10px 12px;width:100%;
 }
 .field textarea{resize:vertical;min-height:80px}
+.field .checks{display:grid;grid-template-columns:1fr;gap:6px;margin:2px 0 0}
+.field .checks label{display:flex;gap:8px;align-items:flex-start;font-weight:400;color:var(--text);cursor:pointer}
+.field .checks input{margin-top:3px;accent-color:var(--pass)}
+.field .err{font-size:.85rem;color:var(--flag);background:var(--flag-bg);border-radius:6px;padding:6px 10px;margin:0}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--link);outline-offset:1px}
 .hp{position:absolute;left:-9999px}
 .notice{background:var(--pass-bg);color:var(--pass);border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.95rem}
