@@ -89,7 +89,8 @@
         </div>
         <div class="field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="Email" required>
+          <input type="email" id="email" name="Email" required autocomplete="email" placeholder="name@company.com">
+          <p class="err" id="email-err" hidden>Please enter your full email address, like name@company.com (it needs an @ and a domain).</p>
         </div>
       </div>
 
@@ -143,17 +144,17 @@
 
       <div class="row2">
         <div class="field">
-          <label for="source">How will you send the data?</label>
-          <select id="source" name="How they'll send the data" required>
-            <option value="">Choose one</option>
-            <option value="a system export">A system export (Excel / CSV from your system)</option>
-            <option value="a line sheet">A line sheet</option>
-            <option value="a spreadsheet">A spreadsheet you keep yourselves</option>
-            <option value="a PDF or printed sheets">A PDF or printed sheets</option>
-            <option value="scans (photos of paper, image-only PDFs)">Scans (photos of paper, image-only PDFs)</option>
-            <option value="not sure yet">Not sure yet</option>
-          </select>
-          <p class="note">If it's a mix, pick the main one and tell us the rest below.</p>
+          <label id="source-label">How will you send the data? <span class="hint">(tick all that apply)</span></label>
+          <div class="checks" id="source" role="group" aria-labelledby="source-label">
+            <label><input type="checkbox" value="a system export"> A system export (Excel / CSV from your system)</label>
+            <label><input type="checkbox" value="a line sheet"> A line sheet</label>
+            <label><input type="checkbox" value="a spreadsheet"> A spreadsheet you keep yourselves</label>
+            <label><input type="checkbox" value="a PDF or printed sheets"> A PDF or printed sheets</label>
+            <label><input type="checkbox" value="scans (photos of paper, image-only PDFs)"> Scans (photos of paper, image-only PDFs)</label>
+            <label><input type="checkbox" value="not sure yet"> Not sure yet</label>
+          </div>
+          <input type="hidden" id="source-all" name="How they'll send the data">
+          <p class="err" id="source-err" hidden>Tick at least one (or "Not sure yet").</p>
         </div>
         <div class="field">
           <label for="barcodes">Does every item have a UPC?</label>
@@ -176,6 +177,8 @@
             <option>4 or more</option>
           </select>
           <p class="note">For example, totes, wallets and crossbody bags is 3.</p>
+          <label for="catnames" style="margin-top:6px">Which categories? <span class="hint">(optional)</span></label>
+          <input type="text" id="catnames" name="Which categories" placeholder="e.g. totes, wallets, crossbody bags">
         </div>
         <div class="field">
           <label for="colors">Your color names</label>
@@ -232,9 +235,43 @@
     document.querySelectorAll('.cal-link').forEach(a => a.href = CAL_URL);
   }
 
+  const form = document.querySelector('form.intake');
+  // "How will you send the data?": tick all that apply, sent as one line ("a system export, a line sheet").
+  const sources = () => [...document.querySelectorAll('#source input:checked')].map(b => b.value).join(', ');
+  // A full email address: something@domain.tld (the browser's own check lets "name@company" through).
+  const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const emailBox = document.getElementById('email'), emailErr = document.getElementById('email-err');
+  const checkEmail = () => {
+    const ok = EMAIL_OK.test(emailBox.value.trim());
+    emailErr.hidden = ok || !emailBox.value.trim();
+    emailBox.setCustomValidity(ok || !emailBox.value.trim() ? '' : 'Please enter your full email address, like name@company.com.');
+    return ok;
+  };
+  if (emailBox) {
+    emailBox.addEventListener('blur', checkEmail);
+    emailBox.addEventListener('invalid', () => { checkEmail(); emailErr.hidden = false; });  // the browser's own check fired first
+    emailBox.addEventListener('input', () => { if (!emailErr.hidden) checkEmail(); });
+  }
+  document.querySelectorAll('#source input').forEach(b => b.addEventListener('change', () => {
+    if (sources()) document.getElementById('source-err').hidden = true;
+  }));
+  if (form) {
+    form.addEventListener('submit', e => {
+      document.getElementById('source-all').value = sources();
+      const emailOk = checkEmail();
+      if (!emailOk) emailErr.hidden = false;
+      const srcOk = !!sources();
+      document.getElementById('source-err').hidden = srcOk;
+      if (!emailOk || !srcOk) {
+        e.preventDefault();
+        e.stopImmediatePropagation();  // don't go on to the booking page
+        (emailOk ? document.querySelector('#source input') : emailBox).focus();
+      }
+    });
+  }
+
   // After the form is emailed to us, send the visitor to the booking page
   // with name, email, company and a short summary already filled in.
-  const form = document.querySelector('form.intake');
   if (CAL_URL && form) {
     form.addEventListener('submit', () => {
       const q = new URLSearchParams();
@@ -261,9 +298,10 @@
       'How many styles: ' + val('count'),
       'Total SKUs (if known): ' + val('skus'),
       'Colors or sizes per style: ' + val('variants'),
-      'How you will send the data (system export, line sheet, spreadsheet, PDF or printed sheets, scans): ' + val('source'),
+      'How you will send the data (system export, line sheet, spreadsheet, PDF or printed sheets, scans; all that apply): ' + sources(),
       'Does every item have a UPC? (yes / some are missing / mostly missing): ' + val('barcodes'),
       'How many product categories? (1 / 2-3 / 4 or more): ' + val('categories'),
+      'Which categories (e.g. totes, wallets): ' + val('catnames'),
       'Your color names (plain like Black, Navy / a few of your own / mostly your own): ' + val('colors'),
       'Ship date / deadline: ' + val('ship'),
       'Photos ready? (2000x2000 / some need work / not ready or low-res): ' + val('photos'),
