@@ -6,4 +6,6 @@
   <url><loc>https://firstpassdata.com/sample-report.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://firstpassdata.com/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://firstpassdata.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://firstpassdata.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://firstpassdata.com/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
