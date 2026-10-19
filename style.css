@@ -309,3 +309,5 @@ nav.mobile{scrollbar-width:none}
 nav.mobile::-webkit-scrollbar{display:none}
 @media (max-width:420px){ nav.mobile{gap:12px} nav.mobile a{font-size:.86rem} }
 @media (max-width:860px){ .hero .specimen{margin:0;width:auto;max-width:none} nav.mobile{margin-top:8px} }
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--paper);color:var(--ink);padding:8px 14px;outline:3px solid var(--link);border-radius:6px}
+.skip:focus{left:8px}

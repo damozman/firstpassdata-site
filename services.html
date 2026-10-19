@@ -27,6 +27,7 @@
 </script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
 
 <header class="site">
@@ -53,7 +54,7 @@
   <a href="/contact.html">Contact</a>
 </nav>
 
-<main>
+<main id="main">
 <div class="page-head">
   <span class="eyebrow">Services</span>
   <h1>Everything between your data and an accepted item.</h1>
@@ -64,7 +65,8 @@
   <div class="service">
     <div class="svc-text">
     <h2>Item setup &amp; PIM data entry</h2>
-    <p>Your columns are mapped to the buyer's current template &mdash; brick, category and all &mdash; and entered directly into the system or handed back as a ready-to-load file. No guessing which fields a category actually requires.</p></div>
+    <p>Your columns are mapped to the buyer's current template &mdash; brick, category and all &mdash; and entered directly into the system or handed back as a ready-to-load file. No guessing which fields a category actually requires.</p>
+    <p>We write your listing text (display name and short description) from your own product descriptions, to the buyer's style guide, and you approve it before anything is submitted. We don't create UPCs: for AAFES, items without one get a code from the Exchange once the buyer approves.</p></div>
     <figure class="proof specimen"><div class="cap"><span>Your columns, mapped to the buyer's template</span></div><table><thead><tr><th scope="col">Your column</th><th scope="col">Template field</th><th scope="col"></th></tr></thead><tbody><tr><td>Style Name</td><td>Product Name</td><td><span class="tag ok">Mapped</span></td></tr><tr><td>Colorway</td><td>Color (vendor)</td><td><span class="tag ok">Mapped</span></td></tr><tr><td>Retail</td><td>MSRP</td><td><span class="tag ok">Mapped</span></td></tr><tr><td>Bag Type: Crossbody</td><td>Crossbody Bags</td><td><span class="tag ok">Category set</span></td></tr></tbody></table></figure>
   </div>
 
@@ -78,7 +80,7 @@
   <div class="service">
     <div class="svc-text">
     <h2>Human-in-the-loop exception review</h2>
-    <p>Anything the software can't prove is correct doesn't get guessed at &mdash; it goes to a dedicated reviewer. Questions only you can answer come back to you as one list, not a scattered stream of emails.</p></div>
+    <p>Anything the software can't prove is correct doesn't get guessed at &mdash; it goes to a second person for review. Questions only you can answer come back to you as one list, not a scattered stream of emails.</p></div>
     <figure class="proof specimen"><div class="cap"><span>What the software won't guess</span></div><table><thead><tr><th scope="col">Field</th><th scope="col">Found</th><th scope="col"></th></tr></thead><tbody><tr><td>Country of origin</td><td>(blank, 5 styles)</td><td><span class="tag rev">Question to you</span></td></tr><tr><td>Material</td><td>"Pebble leather"</td><td><span class="tag rev">To reviewer</span></td></tr><tr><td>Care</td><td>(blank)</td><td><span class="tag ok">Reviewer filled from line sheet</span></td></tr></tbody></table></figure>
   </div>
 
@@ -103,25 +105,25 @@
     <div><h3>Required fields</h3><p>Every mandatory attribute for the item's category is present and in the right format.</p></div>
     <div><h3>Dropdown values</h3><p>Colors, sizes, materials and units matched to the exact values the buyer's system accepts.</p></div>
     <div><h3>Pricing rules</h3><p>MSRP is at or above unit retail, and prices are clean numbers.</p></div>
-    <div><h3>Category attributes</h3><p>Only attributes that belong to the item's category are sent, so none are rejected.</p></div>
+    <div><h3>Category attributes</h3><p>Only attributes that belong to the item's category are sent, so the buyer's system has nothing to reject for that reason.</p></div>
     <div><h3>Product images</h3><p>Resolution, naming and SKU matching checked before the upload window opens.</p></div>
   </div>
 </section>
 
 <section id="pricing">
   <h2>How we price</h2>
-  <p>Per style, by how clean your file is. <strong>We score a sample of your file first, and your quote confirms the tier before any work starts</strong> &mdash; no surprises on the invoice.</p>
+  <p>Per style, by how clean your file is. <strong>We score your complete file when it arrives and send a firm quote within 48 hours. Your quote confirms the tier before any work starts</strong>, so there are no surprises on the invoice.</p>
   <div class="checks">
     <div><h3>Clean file &mdash; $15 per style</h3><p>A system export: barcodes all there, one product category.</p></div>
     <div><h3>Moderate file &mdash; $20 per style</h3><p>A line sheet with some gaps, or two to three categories.</p></div>
-    <div><h3>Messy file &mdash; $25 per style</h3><p>A PDF or one hard source, barcodes mostly missing, or four or more categories.</p></div>
-    <div><h3>What a style includes</h3><p>Up to 4 SKUs (colors and sizes), mapping, cleanup, validation, a second-person review, the buyer's template, upload, photo association and a status and validation report. Extra SKUs are $4 each.</p></div>
+    <div><h3>Messy file &mdash; $25 per style</h3><p>A PDF line sheet, barcodes mostly missing, or four or more categories.</p></div>
+    <div><h3>What a style includes</h3><p>Up to 4 SKUs (colors and sizes), mapping, cleanup, validation, a second-person review, the buyer's template, upload, photo association (1 main photo and up to 9 alternates per color) and a status and validation report. Extra SKUs are $4 each.</p></div>
   </div>
   <div class="checks" style="margin-top:24px">
     <div><h3>Per-file minimum &mdash; $150</h3><p>Applies only when a file's style total comes in under it.</p></div>
-    <div><h3>Rush &mdash; +50%</h3><p>On the styles you need rushed only: 2 business days for up to 25 styles, 4 for up to 50.</p></div>
+    <div><h3>Rush &mdash; +50%</h3><p>On the styles you need rushed only: 2 business days for up to 25 styles, 4 for up to 50. On files over 50 styles, up to 25 styles can be rushed, earliest ship dates first.</p></div>
     <div><h3>Onboarding &mdash; $350 one time</h3><p>On a new client's first quote. Credited to your first retainer month if you sign a retainer within 60 days of your first file.</p></div>
-    <div><h3>Other work &mdash; $75/hr</h3><p>Only with your written OK first: typing up scanned files, combining data from 3 or more sources, or changes after you've approved the final file.</p></div>
+    <div><h3>Other work &mdash; $75/hr</h3><p>Only with your written OK first: typing up scanned files, combining data from 3 or more sources, or changes after you've approved the final file. Also extra, only with your OK: compliance data (hazmat, batteries, Prop 65), sets and kits, missing dimensions or weights, items already in the buyer's system, and photo editing. We don't write new marketing copy or take photos.</p></div>
   </div>
   <h3 style="margin-top:40px">Monthly retainers, from $350/month</h3>
   <p class="fine">For vendors with work every month. Each plan includes a set amount of work at your per-style rate.</p>
@@ -131,7 +133,7 @@
     <tbody>
       <tr><th scope="row">New styles</th><td>None (upkeep only)</td><td>$600 a month (24&ndash;40 styles)</td><td>$1,200 a month (48&ndash;80 styles)</td><td>The drop&rsquo;s styles at your rate</td></tr>
       <tr><th scope="row">Item changes</th><td>50 a month</td><td>25 a month</td><td>50 a month</td><td>50 through the season</td></tr>
-      <tr><th scope="row">Turnaround</th><td>5 business days</td><td>5 business days</td><td>3 days on files up to 25 styles</td><td>A delivery plan, reserved capacity</td></tr>
+      <tr><th scope="row">Turnaround</th><td>5 business days</td><td>5 business days</td><td>3 business days on files up to 25 styles</td><td>A delivery plan, reserved capacity</td></tr>
       <tr><th scope="row">Unused setup</th><td>&mdash;</td><td>Rolls over one month</td><td>Rolls over one month</td><td>&mdash;</td></tr>
     </tbody>
   </table>
@@ -140,9 +142,9 @@
   <div class="terms" style="margin-top:32px">
     <div><h3>Start small</h3><p>We begin with one small file so you can judge the results before committing to more.</p></div>
     <div><h3>No long-term contract</h3><p>Pay per file. Move to a retainer when it makes sense for your volume &mdash; not before.</p></div>
-    <div><h3>Your data stays yours</h3><p>Kept private and used only for your work, so your next file goes faster. Deleted whenever you ask. Glad to sign an NDA.</p></div>
+    <div><h3>Your data stays yours</h3><p>Kept private and used only for your work, so your next file goes faster. Deleted whenever you ask. We sign a mutual NDA with you before you send any files.</p></div>
   </div>
-  <p class="fine" style="margin-top:12px">Turnaround: 5 business days for files up to 25 styles (7 up to 50, 10 up to 100, 15 up to 200), from quote approval and complete data; files received by noon Central count from that day. Brands pay Net 30; small vendors Net 15, with a 50% deposit on the first file. Pay by ACH or wire, check, or card through the link on your invoice. Rework is free when an item is rejected because of an error we made.</p>
+  <p class="fine" style="margin-top:12px">Turnaround: items are submitted in the buyer's system within 5 business days for files up to 25 styles (7 up to 50, 10 up to 100, 15 up to 200), counted from quote approval and complete data; files received by noon Central count from that day. The buyer then assigns item codes, which for AAFES can take up to 5 more business days. Brands pay Net 30; small vendors Net 15, with a 50% deposit on the first file. Pay by ACH or wire (preferred), by check payable to 3six9 Media Masters LLC, or by card or bank account through the secure Stripe link on your invoice. Prices don't include sales tax. Clients in Texas pay Texas sales tax, shown on the quote and invoice. Rework is free when an item is rejected because of an error we made.</p>
 </section>
 
 <section aria-label="Get started">
@@ -167,6 +169,7 @@
     <a href="/terms.html">Terms</a>
   </nav>
   <p class="tagline">First Pass Data. Accepted on the first pass.</p>
+  <p><a href="mailto:hello@firstpassdata.com">hello@firstpassdata.com</a> &middot; Fort Worth, Texas</p>
   <p>&copy; 2026 First Pass Data, operated by 3six9 Media Masters LLC.</p>
   <p>First Pass Data is an independent service provider. We are not affiliated with or endorsed by any retailer, military exchange or software provider mentioned on this site.</p>
 </footer>
