@@ -55,7 +55,7 @@
   <div id="sent-notice" class="notice" style="display:none">
     <p>Thanks &mdash; that's in. We'll reply within one business day to set up a short call.</p>
     <p class="cal-only" hidden>Rather pick a time now? <a class="cal-link" href="#">Book a 15-minute call</a>.</p>
-    <p>Have a sample file handy? <a class="sample-link" href="mailto:files@firstpassdata.com">Email it to files@firstpassdata.com</a> &mdash; a few rows is plenty, and it makes the call much more useful.</p>
+    <p>No files yet, please. After we've both signed the NDA, you'll send your complete file to files@firstpassdata.com.</p>
   </div>
 
   <div class="split even">
@@ -72,7 +72,7 @@
       <div class="alt-contact">
         <p><strong>The form gets you a better first call</strong> &mdash; we come prepared instead of asking you to repeat yourself.</p>
         <p>Rather email? <a class="email-link" href="mailto:hello@firstpassdata.com">hello@firstpassdata.com</a> opens a message with the same questions filled in.</p>
-        <p>Have a sample file? <a class="sample-link" href="mailto:files@firstpassdata.com">Send it to files@firstpassdata.com</a>. A few rows is plenty.</p>
+        <p>No files yet, please. After we've both signed the NDA, you'll send your complete file to files@firstpassdata.com.</p>
         <p class="cal-only" hidden>Or <a class="cal-link" href="#">book a 15-minute call</a> directly.</p>
       </div>
     </div>
@@ -325,11 +325,6 @@
     a.href = mailto('hello@firstpassdata.com', 'Item setup inquiry' + co(),
       'Hi First Pass Data,\n\nWe have styles waiting on item setup. Rough answers below:',
       'Anything that has caused rejects or delays before:\n\n\nThanks,');
-  }));
-  document.querySelectorAll('.sample-link').forEach(a => a.addEventListener('click', () => {
-    a.href = mailto('files@firstpassdata.com', 'Sample file' + co(),
-      'Hi First Pass Data,\n\nAttached is a sample of our product data (a few rows is fine).',
-      'Reminder: attach the file before sending.\n\nThanks,');
   }));
 </script>
 
