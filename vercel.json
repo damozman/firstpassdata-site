@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/pricing", "destination": "/services.html#pricing", "permanent": true },
+    { "source": "/pricing/", "destination": "/services.html#pricing", "permanent": true },
+    { "source": "/pricing.html", "destination": "/services.html#pricing", "permanent": true }
+  ]
+}
