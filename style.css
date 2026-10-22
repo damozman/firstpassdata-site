@@ -3,6 +3,7 @@
   --paper:#FFFFFF; --panel:#F3F5F7; --pass:#1F7A4D; --pass-bg:#E6F2EB;
   --flag:#9A5B0B; --flag-bg:#FBF0DC; --link:#1D4E89;
   --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --tile:#16233A;
   --serif:"Newsreader","Iowan Old Style",Georgia,serif;
   --mono:"IBM Plex Mono",ui-monospace,Consolas,"Courier New",monospace;
   box-sizing:border-box;
@@ -13,13 +14,13 @@
   :root:not([data-theme="light"]){
     --ink:#E8EDF4; --text:#C9D1DC; --muted:#93A0B0; --rule:#2C3746;
     --paper:#0F1722; --panel:#162131; --pass:#5CC98F; --pass-bg:#16332A;
-    --flag:#E8B061; --flag-bg:#33291A; --link:#8DB8EA;
+    --flag:#E8B061; --flag-bg:#33291A; --link:#8DB8EA; --tile:#23385A;
   }
 }
 :root[data-theme="dark"]{
   --ink:#E8EDF4; --text:#C9D1DC; --muted:#93A0B0; --rule:#2C3746;
   --paper:#0F1722; --panel:#162131; --pass:#5CC98F; --pass-bg:#16332A;
-  --flag:#E8B061; --flag-bg:#33291A; --link:#8DB8EA;
+  --flag:#E8B061; --flag-bg:#33291A; --link:#8DB8EA; --tile:#23385A;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:64px}
@@ -33,8 +34,10 @@ a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid var(-
 header.site{display:flex;justify-content:space-between;align-items:center;padding:20px 0;position:sticky;top:0;background:var(--paper);z-index:10;
   box-shadow:0 0 0 100vmax var(--paper),0 1px 0 100vmax var(--rule);clip-path:inset(0 -100vmax -1px);transition:padding .25s ease}
 header.site.scrolled{padding:12px 0}
-.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.05rem}
-.logo svg{width:26px;height:26px;flex:none}
+.logo{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none;font:600 1.4rem/1 var(--serif);letter-spacing:-.01em}
+.logo svg{width:28px;height:28px;flex:none}
+/* the tile lifts a shade in dark mode so it doesn't sink into the page */
+.logo .tile{fill:var(--tile)}
 nav.primary{display:flex;align-items:center;gap:26px}
 nav.primary a{color:var(--muted);text-decoration:none;font-size:.95rem;transition:color .15s}
 nav.primary a:hover{color:var(--ink)}
