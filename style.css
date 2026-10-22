@@ -395,6 +395,8 @@ nav.mobile::-webkit-scrollbar{display:none}
   .reveal.in{opacity:1;transform:none}
   .checker tbody tr{animation:row-in .35s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0) * 25ms)}
 }
+/* printing: a section that hasn't scrolled into view yet would print blank */
+@media print{ .reveal{opacity:1!important;transform:none!important;transition:none!important} }
 @keyframes row-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 /* after the dark console, the closing CTA goes light so two dark blocks don't stack */
 .console + section .band{background:var(--panel);border:1px solid var(--rule)}
