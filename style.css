@@ -182,6 +182,20 @@ ol.steps p{margin:0;color:var(--muted)}
 .hp{position:absolute;left:-9999px}
 .notice{background:var(--pass-bg);color:var(--pass);border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.95rem}
 .subcta{color:var(--muted);font-size:.88rem;margin-top:8px}
+/* Process: a still of the video's first slide, our own image and a plain link (no player, nothing loaded from the
+   video site, so the Privacy page's no-tracking line stays true) */
+.page-head.has-video{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:48px;align-items:center}
+.video-still{position:relative;display:block;border-radius:10px;overflow:hidden;border:1px solid var(--rule);box-shadow:0 18px 40px -24px rgba(0,0,0,.55)}
+.video-still img{display:block;width:100%;height:auto}
+/* the play button sits in the slide's empty lower left, so the headline stays readable */
+.video-still .video-cap{position:absolute;left:5.5%;bottom:4.5%;display:flex;align-items:center;gap:9px;font:500 .86rem/1 var(--sans);color:#fff;background:rgba(15,23,34,.78);border:1px solid rgba(255,255,255,.28);padding:6px 14px 6px 6px;border-radius:999px;transition:background-color .2s,transform .2s}
+.video-still .play{position:relative;flex:none;width:30px;height:30px;border-radius:50%;background:#fff}
+.video-still .play::after{content:"";position:absolute;left:11px;top:8px;border-style:solid;border-width:7px 0 7px 11px;border-color:transparent transparent transparent #16233A}
+.video-still:hover .video-cap,.video-still:focus-visible .video-cap{background:rgba(31,122,77,.95);transform:translateY(-1px)}
+.video-still:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+@media (max-width:860px){ .page-head.has-video{grid-template-columns:1fr;gap:24px} .video-still{max-width:520px} }
+@media (max-width:560px){ .video-still .video-cap{left:4%;bottom:3.5%;gap:7px;font-size:.76rem;padding:4px 10px 4px 4px} .video-still .play{width:24px;height:24px} .video-still .play::after{left:9px;top:6px;border-width:6px 0 6px 9px} }
+@media (prefers-reduced-motion:reduce){ .video-still .video-cap{transition:none} }
 
 .band{background:#16233A;color:#fff;border-radius:10px;padding:36px;display:grid;grid-template-columns:1.3fr auto;gap:24px;align-items:center}
 .band h2,.band p{color:#fff}
